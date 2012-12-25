@@ -9,7 +9,7 @@
         }                                                  \
     } while(0)
 
-const int TILE_WIDTH = 8;
+const int TILE_WIDTH = 16;
 
 // Compute C = A * B
 __global__ void matrixMultiply(float * A, float * B, float * C,
@@ -26,7 +26,7 @@ __global__ void matrixMultiply(float * A, float * B, float * C,
   int row = by * TILE_WIDTH + ty;
   int col = bx * TILE_WIDTH + tx;
 
-  if (row > numARows || col > numBColumns) return;
+  if (row >= numARows || col >= numBColumns) return;
   
   float val = 0;
   for(int k = 0;  k != numAColumns; ++k)
