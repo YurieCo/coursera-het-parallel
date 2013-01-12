@@ -30,7 +30,7 @@ __global__ void matrixMultiplyShared(float * A, float * B, float * C,
   float val = 0;
 
   for( int i = 0; i != numAColumns/TILE_WIDTH; ++i ) {
-    if (row >= numARows || col >= numBColumns) {
+    if (row >= numARows || (i*TILE_WIDTH + tx) >= numBColumns) {
       As[ty][tx] = 0;
       Bs[ty][tx] = 0;
     } 
